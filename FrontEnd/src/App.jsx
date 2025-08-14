@@ -9,12 +9,10 @@ import axios from 'axios'
 import './App.css'
 
 function App() {
-  const [ count, setCount ] = useState(0)
-  const [ code, setCode ] = useState(` function sum() {
-  return 1 + 1
-}`)
+  const [code, setCode] = useState(`Enter your code...
+`)
 
-  const [ review, setReview ] = useState(``)
+  const [review, setReview] = useState(`Review of your code...`)
 
   useEffect(() => {
     prism.highlightAll()
@@ -32,7 +30,7 @@ function App() {
           <div className="code">
             <Editor
               value={code}
-              onValueChange={code => setCode(code)}
+              onValueChange={setCode}
               highlight={code => prism.highlight(code, prism.languages.javascript, "javascript")}
               padding={10}
               style={{
@@ -40,27 +38,27 @@ function App() {
                 fontSize: 16,
                 border: "1px solid #ddd",
                 borderRadius: "5px",
-                height: "100%",
-                width: "100%"
+                width: "100%",
+                backgroundColor: "#0c0c0c",
+                color: "white",
+                
               }}
             />
           </div>
           <div
             onClick={reviewCode}
-            className="review">Review</div>
+            className="review">
+            Review
+          </div>
         </div>
         <div className="right">
-          <Markdown
-
-            rehypePlugins={[ rehypeHighlight ]}
-
-          >{review}</Markdown>
+          <Markdown rehypePlugins={[rehypeHighlight]}>
+            {review}
+          </Markdown>
         </div>
       </main>
     </>
   )
 }
-
-
 
 export default App
